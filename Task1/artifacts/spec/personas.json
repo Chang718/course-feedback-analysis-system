@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Dr. Emily Carter",
+    "role": "Course Instructor",
+    "goals": [
+      "Collect anonymous feedback from students to improve teaching",
+      "Quickly view summary statistics (e.g., average rating per category) without navigating multiple pages",
+      "Access raw feedback data for detailed review"
+    ],
+    "frustrations": [
+      "Existing feedback systems require login and multi-step processes",
+      "Wastes time on administrative overhead instead of focusing on teaching",
+      "Overly complex dashboards with irrelevant features"
+    ]
+  },
+  {
+    "name": "Alex Johnson",
+    "role": "Student",
+    "goals": [
+      "Submit honest feedback about courses quickly and easily",
+      "Ensure my feedback is recorded with correct course and instructor details",
+      "Complete feedback in one go without account creation or extra steps"
+    ],
+    "frustrations": [
+      "Long, multi-page feedback forms that discourage participation",
+      "Systems that require login or personal information, reducing anonymity",
+      "Confusing category options that don't match my experience"
+    ]
+  }
+]

@@ -1,0 +1,398 @@
+{
+  "project_brief": {
+    "domain": "course feedback analysis",
+    "app_shape": "single-page flask web app",
+    "required_sections": [
+      "hero",
+      "form",
+      "summary",
+      "feedback_list"
+    ],
+    "required_endpoints": [
+      "/api/health",
+      "/api/feedback",
+      "/api/summary"
+    ],
+    "required_api_operations": [
+      {
+        "path": "/api/health",
+        "method": "GET"
+      },
+      {
+        "path": "/api/feedback",
+        "method": "GET"
+      },
+      {
+        "path": "/api/feedback",
+        "method": "POST"
+      },
+      {
+        "path": "/api/summary",
+        "method": "GET"
+      }
+    ],
+    "required_fields": [
+      "course_name",
+      "instructor_name",
+      "rating",
+      "category",
+      "feedback_text"
+    ],
+    "category_enum": [
+      "Teaching",
+      "Assessment",
+      "Materials",
+      "Pace",
+      "Engagement"
+    ],
+    "forbidden_features": [
+      "login system",
+      "multi-role access control",
+      "runtime llm analysis",
+      "multi-page navigation",
+      "complex database schema",
+      "rag pipelines",
+      "multi-agent collaboration loops"
+    ]
+  },
+  "problem_statement": "Instructors and administrators need a simple, open-access tool to collect and review course feedback without complex login systems or multi-page navigation. The app must allow students to submit feedback with required fields (course name, instructor name, rating, category, feedback text) and provide aggregated summaries and a list of all feedback entries via API endpoints.",
+  "personas": [
+    {
+      "name": "Dr. Emily Carter",
+      "role": "Course Instructor",
+      "goals": [
+        "Collect anonymous feedback from students to improve teaching",
+        "Quickly view summary statistics (e.g., average rating per category) without navigating multiple pages",
+        "Access raw feedback data for detailed review"
+      ],
+      "frustrations": [
+        "Existing feedback systems require login and multi-step processes",
+        "Wastes time on administrative overhead instead of focusing on teaching",
+        "Overly complex dashboards with irrelevant features"
+      ]
+    },
+    {
+      "name": "Alex Johnson",
+      "role": "Student",
+      "goals": [
+        "Submit honest feedback about courses quickly and easily",
+        "Ensure my feedback is recorded with correct course and instructor details",
+        "Complete feedback in one go without account creation or extra steps"
+      ],
+      "frustrations": [
+        "Long, multi-page feedback forms that discourage participation",
+        "Systems that require login or personal information, reducing anonymity",
+        "Confusing category options that don't match my experience"
+      ]
+    }
+  ],
+  "requirements": [
+    "Single-page Flask web application",
+    "Open-access, no login or authentication required",
+    "Allow students to submit feedback with required fields: course_name, instructor_name, rating, category, feedback_text",
+    "Provide an API endpoint to list all feedback entries",
+    "Provide an API endpoint to return aggregated summary statistics (e.g., average rating per category)",
+    "Provide a health check endpoint",
+    "No multi-page navigation",
+    "No complex database schema",
+    "No runtime LLM analysis",
+    "No RAG pipelines",
+    "No multi-agent collaboration loops",
+    "Category field limited to: Teaching, Assessment, Materials, Pace, Engagement"
+  ],
+  "user_stories": [
+    {
+      "persona": "Dr. Emily Carter (Course Instructor)",
+      "goal": "Collect anonymous feedback from students to improve teaching",
+      "scenario": "As an instructor, I want to use a simple tool where students can submit feedback without logging in, so that I get honest responses and can quickly view summary statistics."
+    },
+    {
+      "persona": "Dr. Emily Carter (Course Instructor)",
+      "goal": "Quickly view summary statistics without navigating multiple pages",
+      "scenario": "As an instructor, I want a single-page dashboard that shows average ratings per category and total feedback count, so I can immediately identify areas for improvement."
+    },
+    {
+      "persona": "Dr. Emily Carter (Course Instructor)",
+      "goal": "Access raw feedback data for detailed review",
+      "scenario": "As an instructor, I want to retrieve a list of all feedback entries via an API endpoint, so I can analyze individual comments and ratings."
+    },
+    {
+      "persona": "Alex Johnson (Student)",
+      "goal": "Submit honest feedback about courses quickly and easily",
+      "scenario": "As a student, I want to fill out a short form without creating an account, so I can provide my feedback in one go and feel that my voice is heard."
+    },
+    {
+      "persona": "Alex Johnson (Student)",
+      "goal": "Ensure my feedback is recorded with correct course and instructor details",
+      "scenario": "As a student, I want to enter the course name and instructor name accurately in the form, so my feedback is attributed correctly."
+    },
+    {
+      "persona": "Alex Johnson (Student)",
+      "goal": "Complete feedback in one go without account creation or extra steps",
+      "scenario": "As a student, I want to submit feedback via a simple page without login or multi-step navigation, so I can finish quickly and anonymously."
+    }
+  ],
+  "data_fields": [
+    {
+      "name": "course_name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "instructor_name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "rating",
+      "type": "integer",
+      "required": true,
+      "validation": "1-5"
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": true,
+      "enum": [
+        "Teaching",
+        "Assessment",
+        "Materials",
+        "Pace",
+        "Engagement"
+      ]
+    },
+    {
+      "name": "feedback_text",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "page_section_mapping": [
+    {
+      "section": "hero",
+      "purpose": "Introduce the app and explain its purpose for collecting course feedback"
+    },
+    {
+      "section": "form",
+      "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
+    },
+    {
+      "section": "summary",
+      "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
+    },
+    {
+      "section": "feedback_list",
+      "purpose": "Show a list of all submitted feedback entries"
+    }
+  ],
+  "endpoint_mapping": [
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "purpose": "Health check for the API"
+    },
+    {
+      "path": "/api/feedback",
+      "method": "GET",
+      "purpose": "Retrieve all feedback entries"
+    },
+    {
+      "path": "/api/feedback",
+      "method": "POST",
+      "purpose": "Submit a new feedback entry"
+    },
+    {
+      "path": "/api/summary",
+      "method": "GET",
+      "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+    }
+  ],
+  "acceptance_criteria": {
+    "ui_acceptance": {
+      "sections": [
+        "hero",
+        "form",
+        "summary",
+        "feedback_list"
+      ],
+      "image_required": true,
+      "summary_cards": [
+        "total_feedback",
+        "average_rating",
+        "positive_ratio",
+        "top_category"
+      ]
+    },
+    "api_acceptance": {
+      "required_endpoints": [
+        "/api/health",
+        "/api/feedback",
+        "/api/summary"
+      ],
+      "required_fields": [
+        "course_name",
+        "instructor_name",
+        "rating",
+        "category",
+        "feedback_text"
+      ]
+    },
+    "interaction_flow": [
+      "Open single-page website",
+      "Submit feedback with all required fields",
+      "Show confirmation after submission",
+      "Refresh summary metrics and feedback list"
+    ],
+    "traceability": {
+      "page_section_mapping": [
+        {
+          "section": "hero",
+          "purpose": "Introduce the app and explain its purpose for collecting course feedback"
+        },
+        {
+          "section": "form",
+          "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
+        },
+        {
+          "section": "summary",
+          "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
+        },
+        {
+          "section": "feedback_list",
+          "purpose": "Show a list of all submitted feedback entries"
+        }
+      ],
+      "endpoint_mapping": [
+        {
+          "path": "/api/health",
+          "method": "GET",
+          "purpose": "Health check for the API"
+        },
+        {
+          "path": "/api/feedback",
+          "method": "GET",
+          "purpose": "Retrieve all feedback entries"
+        },
+        {
+          "path": "/api/feedback",
+          "method": "POST",
+          "purpose": "Submit a new feedback entry"
+        },
+        {
+          "path": "/api/summary",
+          "method": "GET",
+          "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+        }
+      ]
+    }
+  },
+  "business_rules": {
+    "sentiment_rules": {
+      "positive": "rating >= 4",
+      "neutral": "rating == 3",
+      "negative": "rating <= 2"
+    },
+    "summary_rules": {
+      "cards": [
+        "total_feedback",
+        "average_rating",
+        "positive_ratio",
+        "top_category"
+      ],
+      "top_category": "Most frequent feedback category"
+    },
+    "category_enum": [
+      "Teaching",
+      "Assessment",
+      "Materials",
+      "Pace",
+      "Engagement"
+    ]
+  },
+  "validation_report": {
+    "approved": true,
+    "checkpoints": {
+      "Checkpoint A": {
+        "approved": true,
+        "artifacts": [
+          "problem_statement.md",
+          "personas.json"
+        ]
+      },
+      "Checkpoint B": {
+        "approved": true,
+        "artifacts": [
+          "requirements.json",
+          "user_stories.json",
+          "acceptance_criteria.json",
+          "business_rules.json"
+        ]
+      }
+    },
+    "checks": {
+      "required_fields": {
+        "ok": true,
+        "expected": [
+          "category",
+          "course_name",
+          "feedback_text",
+          "instructor_name",
+          "rating"
+        ],
+        "actual": [
+          "category",
+          "course_name",
+          "feedback_text",
+          "instructor_name",
+          "rating"
+        ]
+      },
+      "forbidden_features": {
+        "ok": true,
+        "violations": []
+      },
+      "page_section_mapping": {
+        "ok": true,
+        "expected": [
+          "feedback_list",
+          "form",
+          "hero",
+          "summary"
+        ],
+        "actual": [
+          "feedback_list",
+          "form",
+          "hero",
+          "summary"
+        ]
+      },
+      "endpoint_mapping": {
+        "ok": true,
+        "expected": [
+          "GET /api/feedback",
+          "GET /api/health",
+          "GET /api/summary",
+          "POST /api/feedback"
+        ],
+        "actual": [
+          "GET /api/feedback",
+          "GET /api/health",
+          "GET /api/summary",
+          "POST /api/feedback"
+        ]
+      }
+    }
+  },
+  "generation_metadata": {
+    "problem": {
+      "model": "deepseek-v4-flash",
+      "temperature": 0,
+      "prompt_count": 2
+    },
+    "requirements": {
+      "model": "deepseek-v4-flash",
+      "temperature": 0,
+      "prompt_count": 2
+    }
+  }
+}

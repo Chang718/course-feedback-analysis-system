@@ -1,0 +1,79 @@
+{
+  "ui_acceptance": {
+    "sections": [
+      "hero",
+      "form",
+      "summary",
+      "feedback_list"
+    ],
+    "image_required": true,
+    "summary_cards": [
+      "total_feedback",
+      "average_rating",
+      "positive_ratio",
+      "top_category"
+    ]
+  },
+  "api_acceptance": {
+    "required_endpoints": [
+      "/api/health",
+      "/api/feedback",
+      "/api/summary"
+    ],
+    "required_fields": [
+      "course_name",
+      "instructor_name",
+      "rating",
+      "category",
+      "feedback_text"
+    ]
+  },
+  "interaction_flow": [
+    "Open single-page website",
+    "Submit feedback with all required fields",
+    "Show confirmation after submission",
+    "Refresh summary metrics and feedback list"
+  ],
+  "traceability": {
+    "page_section_mapping": [
+      {
+        "section": "hero",
+        "purpose": "Introduce the app and explain its purpose for collecting course feedback"
+      },
+      {
+        "section": "form",
+        "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
+      },
+      {
+        "section": "summary",
+        "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
+      },
+      {
+        "section": "feedback_list",
+        "purpose": "Show a list of all submitted feedback entries"
+      }
+    ],
+    "endpoint_mapping": [
+      {
+        "path": "/api/health",
+        "method": "GET",
+        "purpose": "Health check for the API"
+      },
+      {
+        "path": "/api/feedback",
+        "method": "GET",
+        "purpose": "Retrieve all feedback entries"
+      },
+      {
+        "path": "/api/feedback",
+        "method": "POST",
+        "purpose": "Submit a new feedback entry"
+      },
+      {
+        "path": "/api/summary",
+        "method": "GET",
+        "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+      }
+    ]
+  }
+}

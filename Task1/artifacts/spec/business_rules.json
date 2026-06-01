@@ -1,0 +1,23 @@
+{
+  "sentiment_rules": {
+    "positive": "rating >= 4",
+    "neutral": "rating == 3",
+    "negative": "rating <= 2"
+  },
+  "summary_rules": {
+    "cards": [
+      "total_feedback",
+      "average_rating",
+      "positive_ratio",
+      "top_category"
+    ],
+    "top_category": "Most frequent feedback category"
+  },
+  "category_enum": [
+    "Teaching",
+    "Assessment",
+    "Materials",
+    "Pace",
+    "Engagement"
+  ]
+}
