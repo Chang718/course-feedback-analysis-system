@@ -1,0 +1,69 @@
+{
+  "routes": [
+    "/api/health",
+    "/api/feedback",
+    "/api/summary"
+  ],
+  "required_fields": [
+    "course_name",
+    "instructor_name",
+    "rating",
+    "category",
+    "feedback_text"
+  ],
+  "summary_cards": [
+    "total_feedback",
+    "average_rating",
+    "positive_ratio",
+    "top_category"
+  ],
+  "index_file": "index.html",
+  "data_file": "seed_feedback.json",
+  "data_path_symbol": "DATA_PATH",
+  "runtime_options_symbol": "get_runtime_options",
+  "error_response_key": "error",
+  "persistence_mode": "file_backed_per_request",
+  "feedback_metadata_fields": [
+    "id",
+    "sentiment",
+    "created_at"
+  ],
+  "runtime_defaults": {
+    "host": "0.0.0.0",
+    "host_env": "FLASK_HOST",
+    "port_env": "PORT",
+    "port": 5000,
+    "debug_env": "FLASK_DEBUG",
+    "debug": false
+  },
+  "success_message": "Feedback submitted successfully.",
+  "missing_fields_prefix": "Missing required fields:",
+  "feedback_id_mode": "incrementing_integer",
+  "category_counts_mode": "observed_only",
+  "root_route_mode": "serve_from_app_directory",
+  "runtime_options_shape": "dict",
+  "image_file": "generated_hero.png",
+  "health_app_name": "course-feedback-analysis",
+  "health_status": "ok",
+  "summary_ratio_scale": "percentage_0_100",
+  "response_shapes": {
+    "health": [
+      "status",
+      "app"
+    ],
+    "feedback_list": [
+      "feedback"
+    ],
+    "feedback_post": [
+      "message",
+      "feedback"
+    ],
+    "summary": [
+      "total_feedback",
+      "average_rating",
+      "positive_ratio",
+      "top_category",
+      "category_counts"
+    ]
+  }
+}

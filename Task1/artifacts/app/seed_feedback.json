@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "course_name": "AI Software Engineering",
+    "instructor_name": "Netzahualcoyotl Hernandez-Cruz",
+    "rating": 4,
+    "category": "Assessment",
+    "feedback_text": "The workload is a little bit heavy.",
+    "sentiment": "positive",
+    "created_at": "2026-05-27T12:00:00+00:00"
+  }
+]

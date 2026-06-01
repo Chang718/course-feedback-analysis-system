@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Feedback Analysis System</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    #hero { background: #4a90d9; color: #fff; padding: 40px 20px; text-align: center; border-radius: 8px; margin-bottom: 30px; }
+    #hero h1 { font-size: 2em; margin-bottom: 10px; }
+    #hero p { font-size: 1.1em; }
+    #hero img { max-width: 100%; height: auto; margin-top: 20px; border-radius: 8px; }
+    #feedback-form { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 30px; }
+    #feedback-form h2 { margin-bottom: 20px; color: #4a90d9; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 1em; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    button { background: #4a90d9; color: #fff; border: none; padding: 12px 24px; font-size: 1em; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #357ac1; }
+    #summary-section { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 30px; }
+    #summary-section h2 { margin-bottom: 20px; color: #4a90d9; }
+    .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .card { background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #e0e0e0; }
+    .card h3 { font-size: 1.2em; color: #555; margin-bottom: 10px; }
+    .card .value { font-size: 2em; font-weight: bold; color: #4a90d9; }
+    #feedback-list { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    #feedback-list h2 { margin-bottom: 20px; color: #4a90d9; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+    th { background: #f0f0f0; }
+    .confirmation { background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 15px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <section id="hero">
+      <h1>Course Feedback Analysis System</h1>
+      <p>Share your feedback to help instructors improve their courses. Anonymous and quick — no login required.</p>
+      <img src="generated_hero.png" alt="Feedback illustration">
+    </section>
+
+    <!-- Form Section -->
+    <section id="feedback-form">
+      <h2>Submit Your Feedback</h2>
+      <div class="confirmation" id="confirmation-msg">Feedback submitted successfully!</div>
+      <form id="feedbackForm">
+        <div class="form-group">
+          <label for="course_name">Course Name *</label>
+          <input type="text" id="course_name" name="course_name" required>
+        </div>
+        <div class="form-group">
+          <label for="instructor_name">Instructor Name *</label>
+          <input type="text" id="instructor_name" name="instructor_name" required>
+        </div>
+        <div class="form-group">
+          <label for="rating">Rating (1-5) *</label>
+          <select id="rating" name="rating" required>
+            <option value="">Select rating</option>
+            <option value="1">1 - Very Poor</option>
+            <option value="2">2 - Poor</option>
+            <option value="3">3 - Average</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="category">Category *</label>
+          <select id="category" name="category" required>
+            <option value="">Select category</option>
+            <option value="Teaching">Teaching</option>
+            <option value="Assessment">Assessment</option>
+            <option value="Materials">Materials</option>
+            <option value="Pace">Pace</option>
+            <option value="Engagement">Engagement</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="feedback_text">Feedback Text *</label>
+          <textarea id="feedback_text" name="feedback_text" required></textarea>
+        </div>
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </section>
+
+    <!-- Summary Section -->
+    <section id="summary-section">
+      <h2>Summary Statistics</h2>
+      <div class="summary-cards">
+        <div class="card">
+          <h3>Total Feedback</h3>
+          <div class="value" id="total_feedback">--</div>
+        </div>
+        <div class="card">
+          <h3>Average Rating</h3>
+          <div class="value" id="average_rating">--</div>
+        </div>
+        <div class="card">
+          <h3>Positive Ratio (%)</h3>
+          <div class="value" id="positive_ratio">--</div>
+        </div>
+        <div class="card">
+          <h3>Top Category</h3>
+          <div class="value" id="top_category">--</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feedback List Section -->
+    <section id="feedback-list">
+      <h2>All Feedback Entries</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Instructor</th>
+            <th>Rating</th>
+            <th>Category</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody id="feedback-table-body">
+          <tr><td colspan="5">Loading...</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    // Store feedback response globally
+    let feedbackData = { feedback: [] };
+
+    // Load summary and feedback on page load
+    window.addEventListener('load', () => {
+      loadSummary();
+      loadFeedback();
+    });
+
+    // Helper to load summary from /api/summary
+    function loadSummary() {
+      fetch('/api/summary')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('total_feedback').textContent = data.total_feedback;
+          document.getElementById('average_rating').textContent = data.average_rating.toFixed(1);
+          document.getElementById('positive_ratio').textContent = data.positive_ratio.toFixed(1) + '%';
+          document.getElementById('top_category').textContent = data.top_category;
+        })
+        .catch(err => {
+          console.error('Error loading summary:', err);
+        });
+    }
+
+    // Helper to load feedback from /api/feedback
+    function loadFeedback() {
+      fetch('/api/feedback')
+        .then(res => res.json())
+        .then(data => {
+          // Store entire response but only iterate over feedbackData.feedback
+          feedbackData = data;
+          const feedbackList = feedbackData.feedback;
+          const tbody = document.getElementById('feedback-table-body');
+          tbody.innerHTML = '';
+          if (feedbackList.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5">No feedback yet.</td></tr>';
+          } else {
+            feedbackList.forEach(item => {
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${escapeHtml(item.course_name)}</td>
+                <td>${escapeHtml(item.instructor_name)}</td>
+                <td>${item.rating}</td>
+                <td>${escapeHtml(item.category)}</td>
+                <td>${escapeHtml(item.feedback_text)}</td>
+              `;
+              tbody.appendChild(row);
+            });
+          }
+        })
+        .catch(err => {
+          console.error('Error loading feedback:', err);
+          document.getElementById('feedback-table-body').innerHTML = '<tr><td colspan="5">Error loading feedback.</td></tr>';
+        });
+    }
+
+    // Simple HTML escape
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Gather form data
+      const course_name = document.getElementById('course_name').value.trim();
+      const instructor_name = document.getElementById('instructor_name').value.trim();
+      const rating = parseInt(document.getElementById('rating').value, 10); // Convert to number
+      const category = document.getElementById('category').value;
+      const feedback_text = document.getElementById('feedback_text').value.trim();
+
+      // Basic validation (already required by HTML)
+      if (!course_name || !instructor_name || isNaN(rating) || !category || !feedback_text) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      const payload = {
+        course_name,
+        instructor_name,
+        rating,
+        category,
+        feedback_text
+      };
+
+      // POST to /api/feedback
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to submit feedback');
+        }
+        return res.json();
+      })
+      .then(() => {
+        // Show confirmation
+        const confirmation = document.getElementById('confirmation-msg');
+        confirmation.style.display = 'block';
+        setTimeout(() => { confirmation.style.display = 'none'; }, 3000);
+
+        // Reset form
+        document.getElementById('feedbackForm').reset();
+
+        // Refresh summary and feedback list
+        loadSummary();
+        loadFeedback();
+      })
+      .catch(err => {
+        console.error('Error submitting feedback:', err);
+        alert('Error submitting feedback. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>

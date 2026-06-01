@@ -1,0 +1,36 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "purpose": "Return a lightweight health response for smoke checks."
+    },
+    {
+      "method": "GET",
+      "path": "/api/feedback",
+      "purpose": "Return stored feedback entries for the dashboard list."
+    },
+    {
+      "method": "POST",
+      "path": "/api/feedback",
+      "purpose": "Persist a feedback entry from the submission form."
+    },
+    {
+      "method": "GET",
+      "path": "/api/summary",
+      "purpose": "Return summary metrics for the dashboard cards."
+    }
+  ],
+  "required_endpoints": [
+    "/api/health",
+    "/api/feedback",
+    "/api/summary"
+  ],
+  "required_fields": [
+    "course_name",
+    "instructor_name",
+    "rating",
+    "category",
+    "feedback_text"
+  ]
+}

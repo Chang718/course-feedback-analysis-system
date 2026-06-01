@@ -1,0 +1,17 @@
+{
+  "image": {
+    "status": "generated",
+    "source": "dashscope",
+    "payload_keys": [
+      "output",
+      "request_id",
+      "usage"
+    ]
+  },
+  "uml": {
+    "use_case_diagram": "C:\\Users\\22306\\Desktop\\2472212-Chang_Xu\\Task1\\artifacts\\design\\use_case_diagram.puml",
+    "activity_diagram": "C:\\Users\\22306\\Desktop\\2472212-Chang_Xu\\Task1\\artifacts\\design\\activity_diagram.puml",
+    "use_case_diagram_png": "C:\\Users\\22306\\Desktop\\2472212-Chang_Xu\\Task1\\artifacts\\design\\use_case_diagram.png",
+    "activity_diagram_png": "C:\\Users\\22306\\Desktop\\2472212-Chang_Xu\\Task1\\artifacts\\design\\activity_diagram.png"
+  }
+}

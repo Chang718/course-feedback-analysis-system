@@ -1,0 +1,10 @@
+@startuml
+start
+:Open single-page website;
+:Review summary metrics;
+:Complete feedback form;
+:Submit feedback via Flask API;
+:Persist feedback entry;
+:Refresh summary and feedback list;
+stop
+@enduml

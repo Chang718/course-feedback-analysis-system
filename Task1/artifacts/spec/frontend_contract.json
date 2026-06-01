@@ -1,0 +1,38 @@
+{
+  "sections": [
+    "hero",
+    "form",
+    "summary",
+    "feedback_list"
+  ],
+  "field_names": [
+    "course_name",
+    "instructor_name",
+    "rating",
+    "category",
+    "feedback_text"
+  ],
+  "category_enum": [
+    "Teaching",
+    "Assessment",
+    "Materials",
+    "Pace",
+    "Engagement"
+  ],
+  "summary_cards": [
+    "total_feedback",
+    "average_rating",
+    "positive_ratio",
+    "top_category"
+  ],
+  "image_file": "generated_hero.png",
+  "page_title": "Course Feedback Analysis System",
+  "required_dom_ids": [
+    "hero",
+    "feedback-form",
+    "summary-section",
+    "feedback-list"
+  ],
+  "feedback_collection_reference": "feedbackData.feedback",
+  "feedback_iteration_target": "feedbackData.feedback"
+}

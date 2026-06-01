@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+actor :Course Instructor: as CI
+actor :Student: as S
+rectangle FeedbackSystem {
+  usecase "Collect anonymous feedback" as UC1
+  usecase "View summary statistics" as UC2
+  usecase "Access raw feedback data" as UC3
+  usecase "Submit feedback" as UC4
+  usecase "Enter course and instructor details" as UC5
+}
+CI --> UC1
+CI --> UC2
+CI --> UC3
+S --> UC4
+S --> UC5
+UC4 ..> UC5 : includes
+@enduml
