@@ -16,13 +16,13 @@ This task contains the single Jupyter Notebook and helper utilities used to gene
 - `# 3. Inception Generation` produces the problem statement, personas, requirements, user stories, and the acceptance/business rule layer
 - `# 5. Freeze Spec` exports `artifacts/spec/frozen_inception_spec.json`
 - `# 6. Construction` compiles a lightweight pipeline and exports contract-aware specs including:
-- `artifacts/spec/backend_contract.json`
-- `artifacts/spec/frontend_contract.json`
-- `artifacts/spec/uml_contract.json`
-- `artifacts/spec/api_spec.json`
-- `artifacts/spec/ui_spec.json`
-- `artifacts/spec/uml_source.json`
-- `artifacts/spec/image_prompt.txt`
+  - `artifacts/spec/backend_contract.json`
+  - `artifacts/spec/frontend_contract.json`
+  - `artifacts/spec/uml_contract.json`
+  - `artifacts/spec/api_spec.json`
+  - `artifacts/spec/ui_spec.json`
+  - `artifacts/spec/uml_source.json`
+  - `artifacts/spec/image_prompt.txt`
 - `# 8. Validate Outputs` performs deterministic export checks before submission
 
 ## Validation
