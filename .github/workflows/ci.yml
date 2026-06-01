@@ -19,6 +19,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r Task1/artifacts/app/requirements.txt
           pip install pytest
-      - name: Run exported app tests
+      - name: Run Task1 test suite
         run: |
-          python -m pytest Task1/tests/test_app.py -v
+          python -m pytest Task1/tests -v
