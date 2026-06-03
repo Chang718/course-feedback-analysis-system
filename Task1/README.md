@@ -28,14 +28,14 @@ This task contains the single Jupyter Notebook and helper utilities used to gene
 ## Validation
 
 - add `Task1/.env` with valid `DEEPSEEK_API_KEY` and `DASHSCOPE_API_KEY` values before running the notebook end-to-end
-- create conda environment with ai_in_se_cw.yml at repository root for downloading new required dependencies
+- create conda environment with `ai_in_se_cw.yml` at `repository root` for downloading new required dependencies
 - execute the notebook top-to-bottom in Jupyter to refresh generated artefacts
 - run the Flask smoke check locally by starting `artifacts/app/app.py` or by using an in-process HTTP server
 - run `python -m pytest Task1/tests -q`
 
 ## Reproduction notes
 
-- ai_in_se_cw.yml is required to use to create new compatible conda environment for running the notebook
+- `ai_in_se_cw.yml` is required to use to create new compatible conda environment for running the notebook
 - the notebook relies on external DeepSeek and DashScope / Bailian API access for text and image generation, instead of APIFREE
 - if the bundled credentials are unavailable or quota-limited, the notebook can be reproduced with your own DeepSeek and DashScope / Bailian API keys, but it is more likely to be sufficient
 - DashScope / Bailian API keys can be created at [Bailian Console](https://bailian.console.aliyun.com/cn-beijing?tab=model#/api-key)
