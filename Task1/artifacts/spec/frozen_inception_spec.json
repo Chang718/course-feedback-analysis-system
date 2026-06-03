@@ -55,82 +55,48 @@
       "multi-agent collaboration loops"
     ]
   },
-  "problem_statement": "Instructors and administrators need a simple, open-access tool to collect and review course feedback without complex login systems or multi-page navigation. The app must allow students to submit feedback with required fields (course name, instructor name, rating, category, feedback text) and provide aggregated summaries and a list of all feedback entries via API endpoints.",
+  "problem_statement": "Course instructors and students need a straightforward, no-login tool to submit and view course feedback. Existing systems are often overly complex, requiring authentication and multiple pages, which discourages participation and delays insights.",
   "personas": [
     {
-      "name": "Dr. Emily Carter",
+      "name": "Dr. Alice Johnson",
       "role": "Course Instructor",
       "goals": [
-        "Collect anonymous feedback from students to improve teaching",
-        "Quickly view summary statistics (e.g., average rating per category) without navigating multiple pages",
-        "Access raw feedback data for detailed review"
+        "Quickly review aggregated feedback ratings and comments for her courses",
+        "Identify common themes in student feedback to adjust teaching methods"
       ],
       "frustrations": [
-        "Existing feedback systems require login and multi-step processes",
-        "Wastes time on administrative overhead instead of focusing on teaching",
-        "Overly complex dashboards with irrelevant features"
+        "Third-party survey tools that require logging in and navigating multiple screens",
+        "Difficulty obtaining a concise summary of student opinions without manual aggregation"
       ]
     },
     {
-      "name": "Alex Johnson",
+      "name": "Bob Smith",
       "role": "Student",
       "goals": [
-        "Submit honest feedback about courses quickly and easily",
-        "Ensure my feedback is recorded with correct course and instructor details",
-        "Complete feedback in one go without account creation or extra steps"
+        "Submit anonymous course feedback easily without creating an account",
+        "Provide detailed opinions on different aspects of the course"
       ],
       "frustrations": [
-        "Long, multi-page feedback forms that discourage participation",
-        "Systems that require login or personal information, reducing anonymity",
-        "Confusing category options that don't match my experience"
+        "Feedback forms that force account creation or have lengthy multi-page workflows",
+        "Lack of clarity on which aspects (e.g., Teaching, Pace) to evaluate"
       ]
     }
   ],
   "requirements": [
-    "Single-page Flask web application",
-    "Open-access, no login or authentication required",
-    "Allow students to submit feedback with required fields: course_name, instructor_name, rating, category, feedback_text",
-    "Provide an API endpoint to list all feedback entries",
-    "Provide an API endpoint to return aggregated summary statistics (e.g., average rating per category)",
-    "Provide a health check endpoint",
-    "No multi-page navigation",
-    "No complex database schema",
-    "No runtime LLM analysis",
-    "No RAG pipelines",
-    "No multi-agent collaboration loops",
-    "Category field limited to: Teaching, Assessment, Materials, Pace, Engagement"
+    "Single-page application",
+    "No login required",
+    "Submit feedback via form",
+    "View aggregated summary",
+    "View list of feedback",
+    "Support for five categories: Teaching, Assessment, Materials, Pace, Engagement",
+    "Feedback fields: course_name, instructor_name, rating, category, feedback_text",
+    "Health check endpoint",
+    "Feedback endpoints (GET and POST)",
+    "Summary endpoint (GET)"
   ],
   "user_stories": [
-    {
-      "persona": "Dr. Emily Carter (Course Instructor)",
-      "goal": "Collect anonymous feedback from students to improve teaching",
-      "scenario": "As an instructor, I want to use a simple tool where students can submit feedback without logging in, so that I get honest responses and can quickly view summary statistics."
-    },
-    {
-      "persona": "Dr. Emily Carter (Course Instructor)",
-      "goal": "Quickly view summary statistics without navigating multiple pages",
-      "scenario": "As an instructor, I want a single-page dashboard that shows average ratings per category and total feedback count, so I can immediately identify areas for improvement."
-    },
-    {
-      "persona": "Dr. Emily Carter (Course Instructor)",
-      "goal": "Access raw feedback data for detailed review",
-      "scenario": "As an instructor, I want to retrieve a list of all feedback entries via an API endpoint, so I can analyze individual comments and ratings."
-    },
-    {
-      "persona": "Alex Johnson (Student)",
-      "goal": "Submit honest feedback about courses quickly and easily",
-      "scenario": "As a student, I want to fill out a short form without creating an account, so I can provide my feedback in one go and feel that my voice is heard."
-    },
-    {
-      "persona": "Alex Johnson (Student)",
-      "goal": "Ensure my feedback is recorded with correct course and instructor details",
-      "scenario": "As a student, I want to enter the course name and instructor name accurately in the form, so my feedback is attributed correctly."
-    },
-    {
-      "persona": "Alex Johnson (Student)",
-      "goal": "Complete feedback in one go without account creation or extra steps",
-      "scenario": "As a student, I want to submit feedback via a simple page without login or multi-step navigation, so I can finish quickly and anonymously."
-    }
+    "As a Course Instructor, I want to quickly review aggregated feedback ratings and comments so that I can identify common themes and adjust teaching methods.",
+    "As a Student, I want to submit anonymous course feedback easily without creating an account so that I can provide detailed opinions on different aspects of the course."
   ],
   "data_fields": [
     {
@@ -147,19 +113,20 @@
       "name": "rating",
       "type": "integer",
       "required": true,
-      "validation": "1-5"
+      "min": 1,
+      "max": 5
     },
     {
       "name": "category",
       "type": "string",
-      "required": true,
       "enum": [
         "Teaching",
         "Assessment",
         "Materials",
         "Pace",
         "Engagement"
-      ]
+      ],
+      "required": true
     },
     {
       "name": "feedback_text",
@@ -167,29 +134,17 @@
       "required": true
     }
   ],
-  "page_section_mapping": [
-    {
-      "section": "hero",
-      "purpose": "Introduce the app and explain its purpose for collecting course feedback"
-    },
-    {
-      "section": "form",
-      "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
-    },
-    {
-      "section": "summary",
-      "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
-    },
-    {
-      "section": "feedback_list",
-      "purpose": "Show a list of all submitted feedback entries"
-    }
-  ],
+  "page_section_mapping": {
+    "hero": "Display app title and description",
+    "form": "Input form for submitting course feedback",
+    "summary": "Show aggregated summary of all feedback (e.g., average rating per category)",
+    "feedback_list": "List all submitted feedback entries"
+  },
   "endpoint_mapping": [
     {
       "path": "/api/health",
       "method": "GET",
-      "purpose": "Health check for the API"
+      "purpose": "Health check to verify server is running"
     },
     {
       "path": "/api/feedback",
@@ -199,12 +154,12 @@
     {
       "path": "/api/feedback",
       "method": "POST",
-      "purpose": "Submit a new feedback entry"
+      "purpose": "Submit new feedback entry"
     },
     {
       "path": "/api/summary",
       "method": "GET",
-      "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+      "purpose": "Retrieve aggregated summary of feedback by category"
     }
   ],
   "acceptance_criteria": {
@@ -244,29 +199,17 @@
       "Refresh summary metrics and feedback list"
     ],
     "traceability": {
-      "page_section_mapping": [
-        {
-          "section": "hero",
-          "purpose": "Introduce the app and explain its purpose for collecting course feedback"
-        },
-        {
-          "section": "form",
-          "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
-        },
-        {
-          "section": "summary",
-          "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
-        },
-        {
-          "section": "feedback_list",
-          "purpose": "Show a list of all submitted feedback entries"
-        }
-      ],
+      "page_section_mapping": {
+        "hero": "Display app title and description",
+        "form": "Input form for submitting course feedback",
+        "summary": "Show aggregated summary of all feedback (e.g., average rating per category)",
+        "feedback_list": "List all submitted feedback entries"
+      },
       "endpoint_mapping": [
         {
           "path": "/api/health",
           "method": "GET",
-          "purpose": "Health check for the API"
+          "purpose": "Health check to verify server is running"
         },
         {
           "path": "/api/feedback",
@@ -276,12 +219,12 @@
         {
           "path": "/api/feedback",
           "method": "POST",
-          "purpose": "Submit a new feedback entry"
+          "purpose": "Submit new feedback entry"
         },
         {
           "path": "/api/summary",
           "method": "GET",
-          "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+          "purpose": "Retrieve aggregated summary of feedback by category"
         }
       ]
     }

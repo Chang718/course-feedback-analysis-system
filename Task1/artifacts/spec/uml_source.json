@@ -1,4 +1,4 @@
 {
-  "use_case": "@startuml\nleft to right direction\nactor :Course Instructor: as CI\nactor :Student: as S\nrectangle FeedbackSystem {\n  usecase \"Collect anonymous feedback\" as UC1\n  usecase \"View summary statistics\" as UC2\n  usecase \"Access raw feedback data\" as UC3\n  usecase \"Submit feedback\" as UC4\n  usecase \"Enter course and instructor details\" as UC5\n}\nCI --> UC1\nCI --> UC2\nCI --> UC3\nS --> UC4\nS --> UC5\nUC4 ..> UC5 : includes\n@enduml",
+  "use_case": "@startuml\nleft to right direction\nactor \"Course Instructor\" as CI\nactor \"Student\" as S\nusecase \"Review aggregated feedback\" as UC1\nusecase \"Submit anonymous course feedback\" as UC2\nCI --> UC1\nS --> UC2\n@enduml",
   "activity": "@startuml\nstart\n:Open single-page website;\n:Review summary metrics;\n:Complete feedback form;\n:Submit feedback via Flask API;\n:Persist feedback entry;\n:Refresh summary and feedback list;\nstop\n@enduml"
 }

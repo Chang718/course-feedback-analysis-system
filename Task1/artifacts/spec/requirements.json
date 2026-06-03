@@ -1,17 +1,15 @@
 {
   "requirements": [
-    "Single-page Flask web application",
-    "Open-access, no login or authentication required",
-    "Allow students to submit feedback with required fields: course_name, instructor_name, rating, category, feedback_text",
-    "Provide an API endpoint to list all feedback entries",
-    "Provide an API endpoint to return aggregated summary statistics (e.g., average rating per category)",
-    "Provide a health check endpoint",
-    "No multi-page navigation",
-    "No complex database schema",
-    "No runtime LLM analysis",
-    "No RAG pipelines",
-    "No multi-agent collaboration loops",
-    "Category field limited to: Teaching, Assessment, Materials, Pace, Engagement"
+    "Single-page application",
+    "No login required",
+    "Submit feedback via form",
+    "View aggregated summary",
+    "View list of feedback",
+    "Support for five categories: Teaching, Assessment, Materials, Pace, Engagement",
+    "Feedback fields: course_name, instructor_name, rating, category, feedback_text",
+    "Health check endpoint",
+    "Feedback endpoints (GET and POST)",
+    "Summary endpoint (GET)"
   ],
   "data_fields": [
     {
@@ -28,19 +26,20 @@
       "name": "rating",
       "type": "integer",
       "required": true,
-      "validation": "1-5"
+      "min": 1,
+      "max": 5
     },
     {
       "name": "category",
       "type": "string",
-      "required": true,
       "enum": [
         "Teaching",
         "Assessment",
         "Materials",
         "Pace",
         "Engagement"
-      ]
+      ],
+      "required": true
     },
     {
       "name": "feedback_text",
@@ -48,29 +47,17 @@
       "required": true
     }
   ],
-  "page_section_mapping": [
-    {
-      "section": "hero",
-      "purpose": "Introduce the app and explain its purpose for collecting course feedback"
-    },
-    {
-      "section": "form",
-      "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
-    },
-    {
-      "section": "summary",
-      "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
-    },
-    {
-      "section": "feedback_list",
-      "purpose": "Show a list of all submitted feedback entries"
-    }
-  ],
+  "page_section_mapping": {
+    "hero": "Display app title and description",
+    "form": "Input form for submitting course feedback",
+    "summary": "Show aggregated summary of all feedback (e.g., average rating per category)",
+    "feedback_list": "List all submitted feedback entries"
+  },
   "endpoint_mapping": [
     {
       "path": "/api/health",
       "method": "GET",
-      "purpose": "Health check for the API"
+      "purpose": "Health check to verify server is running"
     },
     {
       "path": "/api/feedback",
@@ -80,12 +67,12 @@
     {
       "path": "/api/feedback",
       "method": "POST",
-      "purpose": "Submit a new feedback entry"
+      "purpose": "Submit new feedback entry"
     },
     {
       "path": "/api/summary",
       "method": "GET",
-      "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+      "purpose": "Retrieve aggregated summary of feedback by category"
     }
   ]
 }

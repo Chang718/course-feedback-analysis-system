@@ -4,36 +4,8 @@
     "Student"
   ],
   "user_stories": [
-    {
-      "persona": "Dr. Emily Carter (Course Instructor)",
-      "goal": "Collect anonymous feedback from students to improve teaching",
-      "scenario": "As an instructor, I want to use a simple tool where students can submit feedback without logging in, so that I get honest responses and can quickly view summary statistics."
-    },
-    {
-      "persona": "Dr. Emily Carter (Course Instructor)",
-      "goal": "Quickly view summary statistics without navigating multiple pages",
-      "scenario": "As an instructor, I want a single-page dashboard that shows average ratings per category and total feedback count, so I can immediately identify areas for improvement."
-    },
-    {
-      "persona": "Dr. Emily Carter (Course Instructor)",
-      "goal": "Access raw feedback data for detailed review",
-      "scenario": "As an instructor, I want to retrieve a list of all feedback entries via an API endpoint, so I can analyze individual comments and ratings."
-    },
-    {
-      "persona": "Alex Johnson (Student)",
-      "goal": "Submit honest feedback about courses quickly and easily",
-      "scenario": "As a student, I want to fill out a short form without creating an account, so I can provide my feedback in one go and feel that my voice is heard."
-    },
-    {
-      "persona": "Alex Johnson (Student)",
-      "goal": "Ensure my feedback is recorded with correct course and instructor details",
-      "scenario": "As a student, I want to enter the course name and instructor name accurately in the form, so my feedback is attributed correctly."
-    },
-    {
-      "persona": "Alex Johnson (Student)",
-      "goal": "Complete feedback in one go without account creation or extra steps",
-      "scenario": "As a student, I want to submit feedback via a simple page without login or multi-step navigation, so I can finish quickly and anonymously."
-    }
+    "As a Course Instructor, I want to quickly review aggregated feedback ratings and comments so that I can identify common themes and adjust teaching methods.",
+    "As a Student, I want to submit anonymous course feedback easily without creating an account so that I can provide detailed opinions on different aspects of the course."
   ],
   "workflow_steps": [
     "Open single-page website",

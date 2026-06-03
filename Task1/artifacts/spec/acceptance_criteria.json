@@ -35,29 +35,17 @@
     "Refresh summary metrics and feedback list"
   ],
   "traceability": {
-    "page_section_mapping": [
-      {
-        "section": "hero",
-        "purpose": "Introduce the app and explain its purpose for collecting course feedback"
-      },
-      {
-        "section": "form",
-        "purpose": "Provide a feedback submission form with fields: course_name, instructor_name, rating, category, feedback_text"
-      },
-      {
-        "section": "summary",
-        "purpose": "Display aggregated summary statistics such as average rating per category and total feedback count"
-      },
-      {
-        "section": "feedback_list",
-        "purpose": "Show a list of all submitted feedback entries"
-      }
-    ],
+    "page_section_mapping": {
+      "hero": "Display app title and description",
+      "form": "Input form for submitting course feedback",
+      "summary": "Show aggregated summary of all feedback (e.g., average rating per category)",
+      "feedback_list": "List all submitted feedback entries"
+    },
     "endpoint_mapping": [
       {
         "path": "/api/health",
         "method": "GET",
-        "purpose": "Health check for the API"
+        "purpose": "Health check to verify server is running"
       },
       {
         "path": "/api/feedback",
@@ -67,12 +55,12 @@
       {
         "path": "/api/feedback",
         "method": "POST",
-        "purpose": "Submit a new feedback entry"
+        "purpose": "Submit new feedback entry"
       },
       {
         "path": "/api/summary",
         "method": "GET",
-        "purpose": "Return aggregated summary statistics (e.g., average rating per category)"
+        "purpose": "Retrieve aggregated summary of feedback by category"
       }
     ]
   }
