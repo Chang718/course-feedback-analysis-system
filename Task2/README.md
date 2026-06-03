@@ -8,15 +8,11 @@ This folder contains the delivery-layer artefacts for the generated system produ
 - `Task2` packages that generated application into a coursework delivery layer covering version control evidence, automated workflow checks, deployment, and screenshot evidence.
 - `Task2` does not introduce a new application or new business logic. It explains how the validated `Task1` is tracked, tested, deployed, and evidenced for coursework.
 
-## Relationship To Task1
-
-- `Task1` is the generated baseline.
-- `Task2` is the delivery and evidence layer around that project, namely, operation stage.
-
 ## Included Files
 
 - `evidence/` contains required screenshots as evidence for coursework
-- `.github/workflows/ci.yml` is excluded here, which is located in repository root for GitHub to execute
+- `.github/workflows/ci.yml` is excluded here, which is located in `repository root` for GitHub to execute
+- `Dockerfile` is also excluded here, which is located in `Task1\artifacts\app`
 
 ## Local Run
 
