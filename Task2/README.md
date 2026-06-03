@@ -29,8 +29,6 @@ The application starts on `http://127.0.0.1:5000` by default. Use `FLASK_HOST`, 
 
 ## Docker Run
 
-Docker is the main deployment path for `Task2`:
-
 ```bash
 cd Task1/artifacts/app
 docker build -t course-feedback-app .
@@ -38,3 +36,53 @@ docker run -p 5000:5000 course-feedback-app
 ```
 
 After startup, open `http://127.0.0.1:5000` to confirm that the containerized app is running correctly.
+
+## CI/CD Workflow
+
+This project uses `GitHub Actions` as the CI pipeline and `Render` as the deployment platform.
+
+### Workflow Summary
+
+- Code is pushed to the `main` branch on GitHub.
+- GitHub Actions automatically installs dependencies and runs the test suite in `Task1/tests`.
+- If the tests pass, the deployment stage is triggered.
+- `Render` deploys the Flask application from `Task1/artifacts/app` using the existing Dockerfile.
+- The deployed service provides both the website and the Flask API in a single online application.
+
+## Cloud Deployment
+
+The application is deployed as a `Render` Web Service.
+
+### Deployment Configuration
+
+- **Platform:** Render
+- **Service Type:** Web Service
+- **Root Directory:** `Task1/artifacts/app`
+- **Runtime:** Docker
+- **Start Point:** existing `Dockerfile`
+- **Branch:** `main`
+
+### Live URL
+
+- `https://course-feedback-analysis-system.onrender.com`
+
+### Deployment Verification
+
+After deployment, the following endpoints can be used to verify that the application is working correctly:
+
+- Home page: `https://course-feedback-analysis-system.onrender.com`
+- Health check: `https://course-feedback-analysis-system.onrender.com/api/health`
+- Summary API: `https://course-feedback-analysis-system.onrender.com/api/summary`
+
+## Evidence for Coursework
+
+The `evidence/` folder contains the screenshots required by the coursework specification:
+
+- `commit.png` - version control evidence from GitHub commit history
+- `workflow.png` - CI/CD workflow evidence from GitHub Actions
+- `deployment.png` - deployment evidence showing the live website
+
+## Notes
+
+Docker is used as the packaging and deployment mechanism for the Flask application.  
+Local Docker execution is used for validation before cloud deployment, while Render provides the final hosted deployment required for Task 2.

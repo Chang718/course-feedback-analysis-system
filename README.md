@@ -27,3 +27,12 @@ This environment contains additional libraries not covered in course materials, 
 Workflow files are stored in repository root due to GitHub Actions path restriction, though functionally belongs to Task2.
 2. **.gitignore**
 Excludes `.env` confidential configuration files and redundant cache files.
+
+## CI/CD and Deployment
+
+Task 2 put the generated application into delivery-layer.
+
+- CI is handled by GitHub Actions in `.github/workflows/ci.yml`
+- Deployment is handled through `Render`
+- The deployed application is based on `Task1/artifacts/app`
+- Evidence screenshots are stored in `Task2/evidence`
