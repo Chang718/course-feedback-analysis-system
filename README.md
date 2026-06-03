@@ -16,7 +16,7 @@ Create conda environment from yaml file:
 conda env create -f ai_in_se_cw.yml
 conda activate ai_in_se_cw
 ```
-> This environment contains additional libraries not covered in course materials, required to run codes successfully.
+This environment contains additional libraries not covered in course materials, required to run codes successfully.
 
 ## How to Run
 - Task1: Check `Task1/README.md` for detailed usage
